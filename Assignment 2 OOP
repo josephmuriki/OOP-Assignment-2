@@ -1,0 +1,63 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class RadioButtonDemo extends JFrame {
+    private JRadioButton birdButton, catButton, dogButton, rabbitButton, pigButton;
+
+    public RadioButtonDemo() {
+        setTitle("Radio Button Demo");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(400, 300);
+        setLocationRelativeTo(null);
+
+        // Creating the radio buttons
+        birdButton = new JRadioButton("Bird");
+        catButton = new JRadioButton("Cat");
+        dogButton = new JRadioButton("Dog");
+        rabbitButton = new JRadioButton("Rabbit");
+        pigButton = new JRadioButton("Pig");
+
+        // Grouping the radio buttons
+        ButtonGroup group = new ButtonGroup();
+        group.add(birdButton);
+        group.add(catButton);
+        group.add(dogButton);
+        group.add(rabbitButton);
+        group.add(pigButton);
+
+        // Adding action listeners to the radio buttons
+        birdButton.addActionListener(new RadioButtonListener());
+        catButton.addActionListener(new RadioButtonListener());
+        dogButton.addActionListener(new RadioButtonListener());
+        rabbitButton.addActionListener(new RadioButtonListener());
+        pigButton.addActionListener(new RadioButtonListener());
+
+        // Adding the components to the content pane
+        JPanel panel = new JPanel(new GridLayout(6, 1, 10, 10));
+        panel.add(birdButton);
+        panel.add(catButton);
+        panel.add(dogButton);
+        panel.add(rabbitButton);
+        panel.add(pigButton);
+
+        getContentPane().add(panel, BorderLayout.CENTER);
+    }
+
+    private class RadioButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JRadioButton selectedButton = (JRadioButton) e.getSource();
+            JOptionPane.showMessageDialog(RadioButtonDemo.this, "You selected: " + selectedButton.getText());
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new RadioButtonDemo().setVisible(true);
+            }
+        });
+    }
+}
